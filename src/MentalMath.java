@@ -5,38 +5,38 @@ class MentalMath {
     Random rand = new Random();
     Scanner scan = new Scanner(System.in);
     System.out.println("Type E for easy, M for medium, or H for hard");
-    String a = scan.next();
+    String difficulty = scan.next();
     System.out.println("How many questions?");
-    int k = scan.nextInt();
-    int z = 0;
-    int w = 0;
+    int questionCount = scan.nextInt();
+    int percentageRange = 0;
+    int percentageInterval = 0;
     double d = 0;
     double q = 0;
-    if (a.equals("E") || a.equals("e")) {
-      z = 9;
-      w = 10;
-    } else if (a.equals("M") || a.equals("m")) {
-      z = 19;
-      w = 5;
-    } else if (a.equals("H") || a.equals("h")) {
-      z = 99;
-      w = 1;
+    if (difficulty.equals("E") || difficulty.equals("e")) {
+      percentageRange = 9;
+      percentageInterval = 10;
+    } else if (difficulty.equals("M") || difficulty.equals("m")) {
+      percentageRange = 19;
+      percentageInterval = 5;
+    } else if (difficulty.equals("H") || difficulty.equals("h")) {
+      percentageRange = 99;
+      percentageInterval = 1;
     }
     int counter = 0;
-    int x = 0;
-    int y = 0;
+    int percentage = 0;
+    int base = 0;
     int score = 0;
     int root;
     long start = System.currentTimeMillis();
-    for (int i = 0; i < k; i++) {
+    for (int i = 0; i < questionCount; i++) {
       if (Math.random() > 0.5) {
         counter++;
-        x = w*((int)(Math.random()*z)+1);
-        y = 10*((int)(Math.random()*9)+1);
-        System.out.println("What is " + x + "% of " + y + "?");
-        d = scan.nextDouble();
-        q = (double)x;
-        if(Math.abs((d - ((q/100)*y))) <= 0.01) {
+        percentage = percentageInterval * ((int)(Math.random()*percentageRange)+1);
+        base = 10 * ((int)(Math.random()*9)+1);
+        System.out.println("What is " + percentage + "% of " + base + "?");
+        double answer = scan.nextDouble();
+        double precisePercentage = (double)percentage;
+        if(Math.abs((answer - ((precisePercentage / 100) * base))) <= 0.01) {
           System.out.println("Correct!");
           score++;
         } else {
@@ -54,10 +54,10 @@ class MentalMath {
       }
     }
     long end = System.currentTimeMillis();
-    float time = (end-start)/(1000F);
+    float time = (end-start) / (1000F);
     System.out.println("Time elapsed: " + time + " seconds");
-    System.out.println("Score: " + score + "/" + k);
-    int otherCounter = k - counter;
+    System.out.println("Score: " + score + "/" + questionCount);
+    int otherCounter = questionCount - counter;
     System.out.println("You had " + counter + " division problems and " + otherCounter + " square root problems");
   }
 }
